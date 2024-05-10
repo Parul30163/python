@@ -1,0 +1,64 @@
+#equi trianglee
+a=int(input("side 1"))
+b=int(input("side 2"))
+c=int(input("side 3"))
+if (a==b and b==c and a==c):
+         print("eq tringle")
+else:
+        print("False")
+        
+ #divide by 6
+x=int(input("enter no x:"))
+y=int(input("enter no y:"))
+if (x%2==0 and x%3==0 and y%2==0 and y%3==0 ): #check wheather it is divided by 2 nd 3    
+        print("divisible by 6")
+
+else:
+   print("not divisible") 
+   
+ 
+   
+       
+ #units        
+n = int(input("Enter number of units: "))
+count = 0
+total = 0
+if n <= 10:
+    total = n * 50
+elif n <= 30:
+    count = n - 10
+    total = 10 * 50 + count * 20
+else:
+    count = n - 30
+    total = 10 * 50 + 20 * 20 + count * 10
+
+print("Total price:", total, "rs")
+     
+        
+                
+ # if a user has given the input
+# input : 1 python date
+# input : 2 create a folder named as user on desktop
+# input : 3 make a file on desktop
+# input : 4 shutdown windows
+
+import datetime
+import os
+A = int( input("Enter numnber between 1 to 4 : "))
+
+if( A==1 ):
+    print("Today's date is : ", datetime.date.today())
+    
+elif( A==2 ):
+    os.mkdir("C:\\Users\\Acer\\OneDrive\\Desktop\\user")
+
+elif( A==3):
+    file = open("C:\\Users\\Acer\\OneDrive\\Desktop\\file.txt", "w")
+    file.write(input("Write content : "))
+    file.close()
+
+elif( A==4 ):
+    os.system("shutdown /s /t 1")
+
+else:
+    print("Invalid input")
