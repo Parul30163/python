@@ -6,7 +6,7 @@
 #position k accordinh
 # using (sclicing op)
 #[start:stop:[step=1]]
-state="RAJASTHAN"
+"""state="RAJASTHAN"
 state[0:4:1]#raja
 state[0:5:2]#rjs
 state[0:5:-1]#empty string
@@ -158,5 +158,49 @@ for i in range(1,5):
         print(a,chr(c),end=" ")
         c+=1
         a+=1
-    print()#change line    
-                    
+    print()#change line  
+    
+    rows = 5
+
+# Loop through each row
+for i in range(rows):
+    # Print stars for the first column
+    print("*", end=" ")
+    
+    # Print spaces for the columns in between
+    for j in range(1, i):
+        if i == rows - 1 or j == i - 1:
+            print("*", end=" ")
+        else:
+            print(" ", end=" ")
+    
+    # Print stars for the last column
+    print("*" if i != 0 else "")
+
+a=chr(input("enter password"))
+
+#passwordddd questions
+
+password = (input("enter password: "))
+valid_symbols ="!@#$%^&*"
+upchr=0
+for i in range (1,16):
+    
+    if( 'A'<= i <= 'B'):
+        if(upchr<=3):    
+           upchr+=1
+           print(upchr)"""
+           
+no=int(input("entr no:"))
+if no>1:
+    for i in range(2,no):
+        if(no%i==0):
+            print(i,"not prime")
+        else:
+             print(i,"prime")           
+else:
+    print(i,"prime")           
+              
+           
+        
+         
