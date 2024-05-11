@@ -159,8 +159,11 @@ for i in range(1,5):
         c+=1
         a+=1
     print()#change line  
+
+
     
-    rows = 5
+    
+rows = 5
 
 # Loop through each row
 for i in range(rows):
@@ -177,7 +180,7 @@ for i in range(rows):
     # Print stars for the last column
     print("*" if i != 0 else "")
 
-a=chr(input("enter password"))
+a=chr(input("enter password"))"""
 
 #passwordddd questions
 
@@ -186,20 +189,23 @@ valid_symbols ="!@#$%^&*"
 upchr=0
 for i in range (1,16):
     
-    if( 'A'<= i <= 'B'):
+    if( 65<= ord(i) <= 90):
         if(upchr<=3):    
            upchr+=1
-           print(upchr)"""
-           
-no=int(input("entr no:"))
+           print(upchr)
+      #prime     
+"""no=int(input("entr no:"))
 if no>1:
     for i in range(2,no):
         if(no%i==0):
-            print(i,"not prime")
+            print(i,"not prime") 
         else:
              print(i,"prime")           
 else:
-    print(i,"prime")           
+    print(i,"prime")  """
+    
+    
+             
               
            
         
