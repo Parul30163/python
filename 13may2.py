@@ -45,8 +45,93 @@ print(lword_length(word))#output=> 6
 #LAMBDA FUNCTION
 ls = lambda word_list: max(len(word) for word in word_list)
 words = ["parul","manan","chinku"]
-print( ls(words))'''
+print( ls(words))
+
+#integer n length word
+x=["parul","manan","chinku","parthivi","priyani"]
+n=int(input("enterno: "))
+y=[]
+for i in x:
+    if (len(i)>=n):
+        y.append(i)
+print(y)
+#using filter 
+x=["parul","manan","chinku","parthivi","priyanijersgs"]
+n=int(input("enterno: "))
+print(list(filter (lambda a: len(a)>=n, x)))
+
+def pangram(x):
+    if (x in "zxcvbnmasdfghjklqwertyuiop"):
+        return True
+    else :
+        return False
+    
+x="The quick brown fox jumps over the lazy dog"
+for i in x:
+    print(pangram(i))    
+ 
+ #translator()   
+def translator(n):
+    print(dic[n]) 
+dic={"merry":"god","christmas":"jul", "and":"och", "happy": "gott", "new":"nytt", "year":"år"}
+n=str(input("enter english word"))
+translator(n)
+
+
+# find repetation of letter
+def repet(x):
+        c={}
+        for i in x: 
+                if(i in c ):
+                    c[i]+=1
+                else:
+                    c[i]=1             
+        print (i,c) 
+       
+x="abbabcbdbabdbdbabababcbcbab"
+repet(x)
+'''
+
+def mathamatic_py (op,a,b):
+        if (op=='+'):
+            c=a+b
+            print(c)
+        elif(op=='-'):
+            d=a-b
+            print(d)
+            
+        elif(op=="max"):
+            if (a>b):
+                print(a)
+            else :
+                print(b) 
+        elif(op=="min"):
+            if (a<b):
+                print(a)
+            else :
+                print(b) 
+                
+mathamatic_py ('+',5,8)                               
+mathamatic_py ('-',5,8)                         
+mathamatic_py ('max',5,8)             
+mathamatic_py ('min',5,8)             
+                        
 
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
