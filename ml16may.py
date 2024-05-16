@@ -183,7 +183,7 @@ a=np.linspace(1,2,5)# gap will be equal
 a
 
 # np.unique(arr,return_index=true, return_count=True)
-return 3 array  1 the array with unique value 2.  array with respective index 3. aray with count of freq
+#return 3 array  1 the array with unique value 2.  array with respective index 3. aray with count of freq
 
 a=np.array([10,20,30,40,10,20,50])
 np.unique (a,True,True)
