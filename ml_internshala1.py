@@ -15,9 +15,9 @@ it.tail(10)
 ##count of value
 ##mean 
 ##sd
-min
-max
-3 %-1st,2nd ,3rd
+#min
+#max
+#3 %-1st,2nd ,3rd
 
 it.describe()
 
@@ -27,11 +27,11 @@ it.info()
 
 it['Sale Price'].mean()
 
- it['Sale Price'].min()
+it['Sale Price'].min()
 
 it['Sale Price'].max()
 
- it['Sale Price'].std()
+it['Sale Price'].std()
 
 it['Sale Price'].quantile(.25) #for percentile
 
@@ -45,7 +45,7 @@ it['Sale Price'].std()-np.std(it['Sale Price'])
 
 np.std(it['Sale Price'],ddof=1)
 
- it['Sale Price'].std()
+it['Sale Price'].std()
 
 dir(np)
 
