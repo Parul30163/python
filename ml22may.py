@@ -1,175 +1,104 @@
+# Intro to ml
 
+#process >> data preparation >> ml model>> performance evaulation
 
+# 1. Data preparation
 
+#data>> independent data(x)= dependent data(y)
 
-import pandas as pd
+#x=> x_train,x_test
+       
+#y=> y_train,y_test
+         
+#data prepare ==>ml model==> preformance evualation
+
 import numpy as np
+import pandas as pd
 
-
-# In[4]:
-
-
-df=pd.read_csv("C:\\Users\\PARUL\\Downloads\\supply_chain - supply_chain.csv")
-
-
-# In[5]:
-
+df=pd.read_csv("C:\\Users\\PARUL\\Downloads\\placement - placement.csv")
 
 df.head()
 
+df.shape
 
-# In[8]:
+x= df.drop(columns=['placed'],axis=1)#independent
+y=df['placed']#target
 
+print(x.shape)
+print(y.shape)
 
-import plotly.express as px
-import plotly.io as pio
-import plotly. graph_objects as go
-pio.templates.default = "plotly_white"
+from sklearn. model_selection import train_test_split
 
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
 
-# In[9]:
+print(x_train.shape)
+print(x_test.shape)
+print(y_train.shape)
+print(y_test.shape)
 
+# standardization >> data mean =0,,standard devation=1
 
-df.describe()
+np.round(x_train.describe(),2)
 
+from sklearn.preprocessing import StandardScaler
 
-# # now lets get started with analyzing the supply chain by looking at the relationship between the price of product and the revenue genrated by them
 
-# In[11]:
 
+sc=StandardScaler()
 
-fig=px.scatter(df,x='Price',
-              y='Revenue generated',
-              color='Product type',
-              hover_data=['Number of products sold'],
-              trendline ="ols")
-fig.show()
+x_train_sc=sc.fit_transform(x_train)#fit means learn the parameter and transform means apply changes on datas 
 
+x_train_new=pd.DataFrame(x_train_sc,columns=x_train.columns)
 
-# # thus, the company derives more revenue from skincare produvt and the higher the price of skincare product the more revenue they generate . now lets have a  look at the sales by product type:
+x_train_new.head(3)
 
-# In[23]:
+np.round(x_train_new.describe(),3)
 
+df=pd.read_csv("C:\\Users\\PARUL\\Downloads\\insurance - insurance.csv")
 
-sales_data=df.groupby('Product type')['Number of products sold'].sum().reset_index()
-#sales_data
-pie_chart=px.pie(sales_data ,
-                 values='Number of products sold',
-                 names='Product type',
-                 hover_data=['Number of products sold'],
-                 hole=0.5,
-                 color_discrete_sequence=px.colors.qualitative.Pastel)
-pie_chart.update_traces(textposition='inside',textinfo='percent+label')
-pie_chart.show()
+df.head()
 
+x=df.drop(columns=['charges'],axis=1)
+y=df['charges']
 
-# # So 45% of the business comes from skincare products, 29.5% from haircare, and 25.5% from cosmetics. NOw lets have a look at the total revenue generated from shipping carriers:
+from sklearn.model_selection import train_test_split
 
-# In[24]:
+xx_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
 
+print(df.shape)
+print(x.shape)
+print(x_train.shape)
+print(x_test.shape)
+print(y.shape)
+print(y_train.shape)
+print(y_test.shape)
 
-total_revenue=df.groupby('Shipping carriers')['Revenue generated'].sum().reset_index()
-fig=go.Figure()
-fig.add_trace(go.Bar(x=total_revenue['Shipping carriers'],
-                    y=total_revenue['Revenue generated']))
-fig.update_layout(title='Totsl Revenue by Shipping Carrier',
-                 xaxis_title='shipping carriers',
-                 yaxis_title='revenue generated')
-fig.show()
+np.round(x_train.describe(),1)
 
+from sklearn.preprocessing import StandardScaler
 
-# # So the company is using three carriers for transportation, and Carrier B helps the company in generating more revenue. Now let's have a look at the Average lead time and Average Manufacturing Costs for all products of the company:
+sc=StandardScaler()
 
-# In[28]:
 
+x_train_sc=sc.fit_transform(x_train)
 
-avg_lead_time=df.groupby('Product type')['Lead time'].mean().reset_index()
-avg_manufacturing_cost=df.groupby('Product type')['Manufacturing costs'].mean().reset_index()
-result=pd.merge(avg_lead_time,avg_manufacturing_cost,on='Product type')
-result.rename(columns={'Lead time':'Average lead time','Manufacturing costs':'Average manufacturing costs'},inplace=True)
-print(result)
+x_train_sc
 
+x_train_new=pd.DataFrame(x_train_sc,columns=x_train.columns)
 
-# # Analyzing SKUs
-# There's a column in the dataset as SKUs. You must have heard it for the very first time. So, SKU stands for Stock Keeping Units. They're like special codes that help companies keep track of all the different things they have for sale. Imagine you have a large toy store with lots of toys. Each toy is different and has its name and price, but when you want to know how many you have left, you need a way to identify them. So you give each toy a unique code, like a secret number only the store knows. This secret number is called SKU.
+np.round(x_train_new.describe(),1)
 
-# In[30]:
+# Normalization min=0, max=1
 
+from sklearn.preprocessing import MinMaxScaler
 
-revenue_chart=px.line(df, x='SKU',
-                     y='Revenue generated',
-                     title='Revenue Generated by SKU')
-revenue_chart.show()
+mn=MinMaxScaler()
 
+x_train_mn=mn.fit_transform(x_train)
 
-# # There's another column in the dataset as Stock levels. Stock levels refer to the number of products a store or business has in its inventory. Now let's have a look at the stock levels of each SKU:
+x_train_new=pd.DataFrame(x_train_mn,columns=x_train.columns)
 
-# In[31]:
+np.round(x_train.describe(),1)
 
-
-stock_chart=px.line(df, x='SKU',
-                     y='Stock levels',
-                     title='Stock levels by SKU')
-stock_chart.show()
-
-
-# # now lets have a look at the order quantity of each sku;
-
-# In[33]:
-
-
-order_quantity_chart=px.bar(df, x='SKU',
-                     y='Order quantities',
-                     title='Order quantities by SKU')
-order_quantity_chart.show()
-
-
-# # Cost analysis 
-# now lets analyze the shipping cost of carriers
-
-# In[34]:
-
-
-shipping_cost_chart=px.bar(df, x='Shipping carriers',
-                     y='Shipping costs',
-                     title='Shipping costs by Carriers')
-shipping_cost_chart.show()
-
-
-# # In one of the above visualizations, we discovered that Carrier B helps the company in more revenue. It is also the most costly Carrier among the three. Now let's have a look at the cost distribution by transportation mode:
-
-# In[35]:
-
-
-transportation_chart=px.pie(df,
-                           values='Costs',
-                           names='Transportation modes',
-                           title='cost distribution by transportation mode',
-                           hole=0.5,
-                           color_discrete_sequence=px.colors.qualitative.Pastel)
-transportation_chart.show()
-                            
-
-
-# # So the company spends more on road and rail modes for transportation goods
-
-# # analysie defect rate
-# the defect rate in the supply chain refers to the percentage of products that have something wrong or are found broken after shipping. Let's have a look at the average defect rate of all product types:
-
-# In[36]:
-
-
-defect_rates_by_product=df.groupby('Product type')['Defect rates'].mean().reset_index()
-
-fig=px.bar(defect_rates_by_product,x='Product type',y='Defect rates',
-          title='Avg defect rates by product type')
-fig.show()
-
-
-# In[ ]:
-
-
-
-
-
+np.round(x_train_new.describe(),1)
 
